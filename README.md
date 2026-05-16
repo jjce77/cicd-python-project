@@ -1,11 +1,5 @@
 # epam-python-cicd-tasks
-This repository contains a series of Python programming activities integrated with continuous integration and continuous delivery (CI/CD) workflows.
-
-# Service provider 
-- Render
-- Github
-- Sonar cloud
-
+This repository contains a series of Python programming tasks integrated with continuous integration and continuous delivery (CI/CD) workflows. 
 
 ## Project Structure
 
@@ -20,5 +14,7 @@ This repository contains a series of Python programming activities integrated wi
 - `qa`: Testing and quality assurance branch.
 - `main`: Production-ready branch. 
 
+
+*Note: Direct pushes to `main` and `QA` are restricted. Code can only enter `main` via a Pull Request originating strictly from the `QA` branch.*
 
 
