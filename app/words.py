@@ -1,7 +1,4 @@
-def build_word(words):
+def build_word(words, p1, p2, p3, p4, p5, p6, p7, p8):
     """Task 3 placeholder."""
-    raise NotImplementedError
+    return words
 
-def build_word_duplicate(words):
-    """Task 3 placeholder."""
-    raise NotImplementedError
