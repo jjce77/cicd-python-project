@@ -1,4 +1,4 @@
-# epam-python-cicd-tasks
+# CI/CD Python Project
 
 ## Summary & Core Objectives
 
@@ -29,16 +29,28 @@ This repository contains three Python programming tasks integrated with a CI/CD 
 
 ## Workflow overview
 
+
 ```mermaid
 flowchart TD
-    A[dev branch] --> B[Triggers: Pytest + Ruff + SonarCloud]
-    B --> C[Merge / PR]
-    C --> D[qa branch]
-    D --> E[Triggers: Internal Docker Build + Auto-deploy to Render]
-    E --> F[Merge / PR]
-    F --> G[main branch]
-    G --> H[Triggers: AWS EC2 Deploy]
+    A[<b>dev branch</b> \n Triggers: Pytest + Ruff + SonarCloud] --> C([Merge / PR])
+    C --> D[<b>qa branch</b> \n Triggers: Docker Bbild + Render deploy]
+    D --> F([Merge / PR])
+    F --> G[<b>main branch</b> \n Triggers: AWS EC2 Deploy]
+
+
+    classDef dev fill:#dbeafe,stroke:#2563eb,stroke-width:2px,color:#111827;
+    classDef qa fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#111827;
+    classDef main fill:#fef3c7,stroke:#d97706,stroke-width:2px,color:#111827;
+    classDef step fill:#f9fafb,stroke:#6b7280,stroke-width:1.5px,color:#111827;
+
+    class A dev;
+    class B,C step;
+    class D qa;
+    class E,F step;
+    class G main;
+    class H step;
 ```
+
 
 ## Validation
 
@@ -56,5 +68,3 @@ flowchart TD
 - `qa` publishes the Docker image to GHCR and deploys it to Render.
 - `main` triggers deployment to AWS EC2.
 - The EC2 service exposes `/health` on port `8000`.
-
-
