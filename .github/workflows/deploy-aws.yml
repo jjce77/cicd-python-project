@@ -1,0 +1,25 @@
+name: Deploy AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SSH deploy to EC2
+        uses: appleboy/ssh-action@v1.2.1
+        with:
+          host: ${{ secrets.AWS_EC2_HOST }}
+          username: ${{ secrets.AWS_EC2_USER }}
+          key: ${{ secrets.AWS_EC2_SSH_KEY }}
+          script: |
+            set -e
+            echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u "${{ secrets.GHCR_USERNAME }}" --password-stdin
+            docker pull ghcr.io/jjce77/cicd-python-project:latest
+            docker stop cicd-python-project || true
+            docker rm cicd-python-project || true
+            docker run -d --name cicd-python-project -p 8000:10000 ghcr.io/jjce77/cicd-python-project:latest
